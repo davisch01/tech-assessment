@@ -18,9 +18,9 @@ namespace CSharp.Test.Controllers
         {
             OrderModels = new List<OrderModel>
             {
-                new OrderModel { OrderId = new Guid(), CustomerId = ValidCustomerId, Items = new List<string>{"Pizza"} },
-                new OrderModel { OrderId = new Guid(), CustomerId = ValidCustomerId, Items = new List<string>{"Pie"} },
-                new OrderModel { OrderId = new Guid(), CustomerId = ValidCustomerId, Items = new List<string>{"Panini"} }
+                new OrderModel { OrderId = Guid.NewGuid(), CustomerId = ValidCustomerId, Items = new List<string>{"Pizza"} },
+                new OrderModel { OrderId = Guid.NewGuid(), CustomerId = ValidCustomerId, Items = new List<string>{"Pie"} },
+                new OrderModel { OrderId = Guid.NewGuid(), CustomerId = ValidCustomerId, Items = new List<string>{"Panini"} }
             };
 
             OrdersServiceMock = Substitute.For<IOrdersService>();

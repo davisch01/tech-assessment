@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace CSharp.Services
 {
-    public class OrdersService : IOrdersService
+    public static class OrdersRepository
     {
-        //later replaced by repository services
-        private readonly List<OrderModel> _repository = new List<OrderModel>
+        //TODO later replaced by repository services
+        public static List<OrderModel> Orders = new List<OrderModel>
         {
             new OrderModel{
                 CustomerId = new Guid("85fb3113-c1c2-4a09-9eb3-f87c41d86709"),
@@ -48,10 +48,13 @@ namespace CSharp.Services
                 Items = new List<string>{"Pizza"}
             }
         };
+    }
 
+    public class OrdersService : IOrdersService
+    {
         public List<OrderModel> GetOrdersByCustomerId(Guid customerId)
         {
-            return _repository.Where(i => i.CustomerId == customerId).ToList();
+            return OrdersRepository.Orders.Where(i => i.CustomerId == customerId).ToList();
         }
 
         public OrderModel CreateOrder(OrderModel order)
@@ -60,19 +63,19 @@ namespace CSharp.Services
             var addedOrderModel = new OrderModel
             {
                 CustomerId = order.CustomerId,
-                OrderId = new Guid(),
+                OrderId = Guid.NewGuid(),
                 Status = OrderStatus.Active,
                 Items = order.Items
             };
 
-            _repository.Add(addedOrderModel);
+            OrdersRepository.Orders.Add(addedOrderModel);
             return addedOrderModel;
         }
 
         public OrderModel UpdateOrder(OrderModel order)
         {
             //TODO validations
-            var existingOrder = _repository.Where(i => i.OrderId == order.OrderId).FirstOrDefault();
+            var existingOrder = OrdersRepository.Orders.Where(i => i.OrderId == order.OrderId).FirstOrDefault();
 
             if (existingOrder == null)
             {
@@ -86,7 +89,7 @@ namespace CSharp.Services
 
         public OrderModel CancelOrder(Guid orderId)
         {
-            var existingOrder = _repository.Where(i => i.OrderId == orderId).FirstOrDefault();
+            var existingOrder = OrdersRepository.Orders.Where(i => i.OrderId == orderId).FirstOrDefault();
 
             if (existingOrder == null)
             {
