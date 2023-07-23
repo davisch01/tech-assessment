@@ -7,7 +7,13 @@ namespace CSharp.Services
 {
     public class OrdersService : IOrdersService
     {
+
         public OrderModel CancelOrder(Guid orderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public OrderModel CreateOrder(OrderModel order)
         {
             throw new NotImplementedException();
         }

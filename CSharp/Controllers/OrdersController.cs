@@ -1,5 +1,8 @@
-﻿using CSharp.Services.Interfaces;
+﻿using CSharp.Models;
+using CSharp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace CSharp.Controllers
 {
@@ -16,27 +19,35 @@ namespace CSharp.Controllers
 
         [HttpGet]
         [Route("{customerId}")]
-        public string Get()
+        public List<OrderModel> GetByCustomerId(Guid customerId)
         {
-            return default;
+            var orders =  _ordersService.GetOrdersByCustomerId(customerId);
+
+            return orders;
         }
 
         [HttpPost]
-        public string Post()
+        public OrderModel Post(OrderModel orderModel)
         {
-            return default;
+            var createdOrder = _ordersService.CreateOrder(orderModel);
+
+            return createdOrder;
         }
 
         [HttpPut]
-        public string Update()
+        public OrderModel Update(OrderModel orderModel)
         {
-            return default;
+            var updatedOrder = _ordersService.UpdateOrder(orderModel);
+
+            return updatedOrder;
         }
 
         [HttpDelete]
-        public string Delete()
+        public OrderModel Delete(Guid orderId)
         {
-            return default;
+            var canceledOrder = _ordersService.CancelOrder(orderId);
+
+            return canceledOrder;
         }
     }
 }

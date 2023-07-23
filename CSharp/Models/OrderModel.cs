@@ -1,10 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharp.Models
 {
     public class OrderModel
     {
-        Guid OrderId { get; set; }
-        Guid CustomerId { get; set; }
+        public Guid OrderId { get; set; }
+        public Guid CustomerId { get; set; }
+        public List<string> Items { get; set; }
+        public OrderStatus Status { get; set; }
+    }
+
+    public enum OrderStatus
+    {
+        Unknown,
+        Active,
+        Canceled
     }
 }
