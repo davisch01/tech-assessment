@@ -97,7 +97,7 @@ namespace CSharp.Test.Services
         [TestMethod]
         public void ReturnsNullIfNoExistingOrder()
         {
-            var result = Sut.UpdateOrder(new OrderModel { OrderId = new Guid() });
+            var result = Sut.UpdateOrder(new OrderModel { OrderId = Guid.NewGuid() });
 
             Assert.IsNull(result);
         }
@@ -137,7 +137,7 @@ namespace CSharp.Test.Services
         [TestMethod]
         public void ReturnsNullIfNoExistingOrder()
         {
-            var result = Sut.CancelOrder(new Guid());
+            var result = Sut.CancelOrder(Guid.NewGuid());
 
             Assert.IsNull(result);
         }

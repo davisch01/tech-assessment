@@ -18,7 +18,6 @@ namespace CSharp.Controllers
         }
 
         [HttpGet]
-        [Route("{customerId}")]
         public List<OrderModel> GetByCustomerId(Guid customerId)
         {
             var orders =  _ordersService.GetOrdersByCustomerId(customerId);
@@ -43,6 +42,7 @@ namespace CSharp.Controllers
         }
 
         [HttpDelete]
+        [Route("{orderId}")]
         public OrderModel Delete(Guid orderId)
         {
             var canceledOrder = _ordersService.CancelOrder(orderId);
