@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSharp.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CSharp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrdersController : ControllerBase
+    public class OrdersController: ControllerBase
     {
+        private readonly IOrdersService _ordersService;
+
+        public OrdersController(IOrdersService orderService)
+        {
+            _ordersService = orderService;
+        }
+
         [HttpGet]
         [Route("{customerId}")]
         public string Get()
